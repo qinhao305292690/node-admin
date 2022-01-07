@@ -8,15 +8,6 @@ const FileStore = require('session-file-store')(session);
 // 链接数据库
 require('./model/connect')
 const app = express()
-// app.use(session({
-//   secret: "weird sheep",
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: {
-//     user:"default",
-//     maxAge: 14*24*60*60*1000
-//   }
-// }));
 app.use(session({
   name: 'session_id',
   secret: 'chyingp', // 用来对session id相关的cookie进行签名
