@@ -7,6 +7,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 // 链接数据库
 require('./model/connect')
+
 const app = express()
 app.use(session({
   name: 'session_id',
