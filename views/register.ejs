@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/public/css/carousel.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body style="background: url('/public/images/loginBackground.jpg')">
+<form id="form" method="post" class="register">
+    <center style="color: red;" id="errorMsg"></center>
+    <a href="/login">点击登录</a>
+    <div class="mb-3">
+        <label for="username" class="form-label">用户名:</label>
+        <input required name="username" type="text" class="form-control" id="username">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">密码:</label>
+        <input required name="password" type="password" class="form-control" id="password">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">邮箱:</label>
+        <input required name="email" type="email" class="form-control" id="email">
+    </div>
+    <div class="mb-3">
+        <label for="age" class="form-label">年龄:</label>
+        <input required minlength="1" maxlength="3" type="number" name="age" class="form-control" id="age">
+    </div>
+    <div class="mb-3 gender">
+        <label class="form-label">性别:</label>
+        <label class="form-label"><input name="gender" type="radio" value="1"/> 男 </label>
+        <label class="form-label"><input name="gender" type="radio" value="0"/> 女 </label>
+        <label class="form-label"><input checked name="gender" type="radio" value="2"/> 保密 </label>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+<script>
+  $(function () {
+    $('#form').on('submit', function (event) {
+      event.preventDefault()
+      const data = $('#form').serialize()
+      $.ajax({
+        method: 'post',
+        dataType: 'json',
+        data,
+        url: '/registerUser',
+        success: function (data) {
+          if (data.code !== 0) {
+            $('#errorMsg').html(data.message)
+          } else {
+            $('#errorMsg').css('color','#0dff0d').html(data.message)
+          }
+        }
+      })
+    })
+
+  })
+
+</script>
+</body>
+</html>

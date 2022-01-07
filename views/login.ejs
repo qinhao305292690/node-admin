@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body style="background: url('/public/images/loginBackground.jpg')">
+
+<div style="display: none;" id="message" class="alert alert-danger" role="alert">
+</div>
+<div class="card" style="width: 20rem;margin: 100px auto;">
+    <div class="card-body">
+        <h5 class="card-title">登录</h5>
+        <form id="form">
+            <div class="mb-3 row">
+                <label for="username" class="col-sm-3 col-form-label">帐号:</label>
+                <div class="col-sm-9">
+                    <input required name="username" type="text" class="form-control" id="username">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="password" class="col-sm-3 col-form-label">密码:</label>
+                <div class="col-sm-9">
+                    <input required name="password" type="password" class="form-control" id="password">
+                </div>
+            </div>
+            <center style="text-align: right;">
+                <button type="submit" class="btn btn-primary">登录</button>
+                <button onclick="location.href='/register'" type="button" class="btn btn-primary">注册</button>
+            </center>
+
+        </form>
+    </div>
+</div>
+</body>
+<script>
+  $(function () {
+    $('#form').on('submit', function (event) {
+      event.preventDefault()
+      const data = $('#form').serialize()
+      console.log(data);
+      $.ajax({
+        method: 'post',
+        dataType: 'json',
+        data,
+        url: '/login',
+        success: function (data) {
+          console.log(data, 'data');
+          if (data.code === 0) {
+            window.history.replaceState('', '首页', '/')
+            window.location.href = '/'
+          } else if (data.code === 1) {
+            $('#message').show().text(data.message)
+            setTimeout(() => {
+              $('#message').hide()
+            }, 2000)
+          }
+        }
+      })
+    })
+  })
+</script>
+</html>

@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img width="26" src="/public/images/logo.png" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">资源</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        开放平台
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Vue</a></li>
+                        <li><a class="dropdown-item" href="#">React</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">webpack学习</a>
+                </li>
+            </ul>
+            <% if(user){ %>
+                <% const {username, age, gender} = user %>
+                <div>
+                    <img width="30" src="/public/images/avatar.png" alt="">
+                    <span style="padding: 0 5px;">姓名:<%= username %></span>
+                    <span>年龄: <%= age %></span>
+                    <span>性别: <%= gender === '1' ? '男' : gender === '0' ? '女' : '保密' %></span>
+                    <button
+                            onclick="loginOut()"
+                            style="margin-left: 10px;"
+                            type="button"
+                            class="btn btn-outline-success btn-sm">
+                        退出登录
+                    </button>
+                </div>
+            <% } else{ %>
+                <form class="d-flex">
+                    <button onclick="toLogin(event, '/login')" style="flex-shrink: 0;margin-right: 10px;"
+                            class="btn btn-outline-success" type="submit">登录
+                    </button>
+                    <button onclick="toLogin(event,'/register')" style="flex-shrink: 0" class="btn btn-outline-success"
+                            type="submit">注册
+                    </button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</nav>
+<script>
+  function toLogin(event, uri) {
+    event.preventDefault();
+    window.location.href = uri
+  }
+  // 退出登录
+  function loginOut() {
+    window.history.replaceState('','','/login')
+    window.location.href = '/login'
+  }
+</script>
+
+

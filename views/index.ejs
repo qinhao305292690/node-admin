@@ -1,0 +1,11 @@
+<!--资源文件-->
+<% layout('./layout/index') -%>
+<% block('header', partial('components/header')) -%>
+<% stylesheet('/node_modules/bootstrap/dist/css/bootstrap.min.css') -%>
+<% stylesheet('/public/css/carousel.css') -%>
+<% script('/node_modules/bootstrap/dist/js/bootstrap.min.js') -%>
+<% script('node_modules/jquery/dist/jquery.min.js') -%>
+
+<%- partial('components/content') %>
+
+<% block('footer', partial('components/footer')) -%>
