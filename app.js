@@ -17,7 +17,7 @@ app.use(session({
   resave: false, // 是否每次都重新保存会话，建议false
   cookie: {
     user: null,
-    maxAge: 20 * 1000
+    maxAge: 7 * 24* 60 * 60 * 1000
   }
 }));
 
